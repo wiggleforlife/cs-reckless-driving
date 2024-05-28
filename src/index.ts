@@ -15,6 +15,7 @@ const processFile = async () => {
         // Work with each record
         records.push(record);
     }
+    records.shift();
     return records;
 };
 
@@ -26,7 +27,15 @@ const port = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 
 app.get("/", (req: Request, res: Response) => {
+    res.redirect("/map");
+});
+
+app.get("/map", async (req: Request, res: Response) => {
     res.render("pages/map", { incidents: await processFile() });
+});
+
+app.get("/recent", async (req: Request, res: Response) => {
+    res.render("pages/recent", { incidents: await processFile() });
 });
 
 app.listen(port, () => {

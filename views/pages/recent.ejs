@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<%- include('../partials/nav') %>
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Borough</th>
+        <th>Zip code</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Street</th>
+        <th>Cross street</th>
+        <th>Off street</th>
+        <th>Persons injured</th>
+        <th>Persons killed</th>
+        <th>Factor - vehicle 1</th>
+        <th>Factor - vehicle 2</th>
+        <th>Factor - vehicle 3</th>
+        <th>Factor - vehicle 4</th>
+        <th>Factor - vehicle 5</th>
+        <th>Type - vehicle 1</th>
+        <th>Type - vehicle 2</th>
+        <th>Type - vehicle 3</th>
+        <th>Type - vehicle 4</th>
+        <th>Type - vehicle 5</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% incidents.forEach(incident => { %>
+        <tr>
+            <% incident.forEach(row => { %>
+                <td><%= row %></td>
+            <% }) %>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+</body>
+</html>
