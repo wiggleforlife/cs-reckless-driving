@@ -26,11 +26,7 @@ const port = process.env.PORT || 3000;
 app.set("view engine", "ejs");
 
 app.get("/", (req: Request, res: Response) => {
-    res.render("pages/index");
-});
-
-app.get("/csv", async (req: Request, res: Response) => {
-    res.send(await processFile())
+    res.render("pages/map", { incidents: await processFile() });
 });
 
 app.listen(port, () => {
