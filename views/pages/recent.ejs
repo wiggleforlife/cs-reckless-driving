@@ -9,6 +9,15 @@
 </head>
 <body>
 <%- include('../partials/nav') %>
+
+<label for="sort">Sort by: </label>
+<select name="sort" id="sort">
+    <option value="newest">Most recent</option>
+    <option value="oldest">Least recent</option>
+    <option value="most_injured">Most injuries</option>
+    <option value="most_killed">Most deaths</option>
+</select>
+
 <table>
     <thead>
     <tr>
@@ -45,5 +54,13 @@
     <% }) %>
     </tbody>
 </table>
+
+<script>
+    document.getElementById("sort").addEventListener("change", (e) => {
+        let url  = new URL(document.URL);
+        url.searchParams.set("sort", e.target.value);
+        document.location.href = url.href;
+    })
+</script>
 </body>
 </html>
