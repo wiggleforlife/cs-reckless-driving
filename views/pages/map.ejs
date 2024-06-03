@@ -27,6 +27,7 @@
 <body>
 <%- include('../partials/nav') %>
 <div id="map"></div>
+<%- include('../partials/footer') %>
 <script>
     const map = L.map('map', {center: [40.7, -73.9], zoom: 11});
 
@@ -39,7 +40,7 @@
     <% for (var i = 0; i < incidents.length; i++) { %>
         <% var point = incidents[i] %>
         <% reasons.push(point[11] + (point[12] !== "" && point[12] !== "Unspecified" && point[12] !== point[11] ? ", " + point[12] : "")) %>
-        markers.addLayer(L.marker(["<%= point[4] %>", "<%= point[5] %>"]).bindPopup("<%= point[0] + " - " + point[1] + "<br>" + point[9] + " injured, " + point[10] + " killed because of " + reasons[i] %>")); // FIXME <br> no longer works
+        markers.addLayer(L.marker(["<%= point[4] %>", "<%= point[5] %>"]).bindPopup("<%- point[0] + " - " + point[1] + "<br>" + point[9] + " injured, " + point[10] + " killed because of " + reasons[i] %>"));
     <% } %>
 
     map.addLayer(markers);

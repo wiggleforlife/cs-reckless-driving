@@ -12,7 +12,6 @@ npm run dev
 ```
 
 ## TODO
-* Description + licenses + credits
+* Description
 * CSS
-* Filters
 * Push data
