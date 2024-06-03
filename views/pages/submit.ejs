@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en_US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Submit data</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <style>
+        #map {
+            height: 500px;
+            width: 750px;
+        }
+    </style>
+</head>
+<body>
+<%- include('../partials/nav') %>
+
+<form action="/api/submit" method="POST">
+    <label>Select a point on the map.</label>
+    <div id="map"></div>
+    <input name="latitude" id="latitude" type="hidden" readonly>
+    <input name="longitude" id="longitude" type="hidden" readonly><br>
+
+    <label for="crash_date">Crash date</label>
+    <input name="crash_date" id="crash_date" type="date"><br>
+
+    <label for="crash_time">Crash time</label>
+    <input name="crash_time" id="crash_time" type="time"><br>
+
+    <label for="borough">Borough</label>
+    <select name="borough" id="borough">
+        <option value="MANHATTAN">Manhattan</option>
+        <option value="BROOKLYN">Brooklyn</option>
+        <option value="QUEENS">Queens</option>
+        <option value="BRONX">The Bronx</option>
+        <option value="STATEN ISLAND">Staten Island</option>
+    </select><br>
+
+    <label for="injured">Number of persons injured</label>
+    <input name="injured" id="injured" type="number"><br>
+
+    <label for="killed">Number of persons killed</label>
+    <input name="killed" id="killed" type="number"><br>
+
+    <% for (var i = 0; i < 3; i++) { %>
+        <label for="factor_vehicle_<%= i %>">Contributing factor for vehicle <%= i %></label>
+        <select name="factor_vehicle_<%= i %>" id="factor_vehicle_<%= i %>">
+            <option value="">N/A</option>
+            <option value="Driver Inattention/Distraction">Driver Inattention/Distraction</option>
+            <option value="Failure to Yield Right-of-Way">Failure to Yield Right-of-Way</option>
+            <option value="Following Too Closely">Following Too Closely</option>
+            <option value="Passing or Lane Usage Improper">Passing or Lane Usage Improper</option>
+            <option value="Traffic Control Disregarded">Traffic Control Disregarded</option>
+            <option value="Passing Too Closely">Passing Too Closely</option>
+            <option value="Backing Unsafely">Backing Unsafely</option>
+            <option value="Other Vehicular">Other Vehicular</option>
+            <option value="Unsafe Speed">Unsafe Speed</option>
+            <option value="Turning Improperly">Turning Improperly</option>
+        </select><br>
+    <% } %>
+
+    <% for (var i = 0; i < 3; i++) { %>
+        <label for="type_vehicle_<%= i %>">Type for vehicle <%= i %></label>
+        <select name="type_vehicle_<%= i %>" id="type_vehicle_<%= i %>">
+            <option value="">N/A</option>
+            <option value="Sedan">Sedan</option>
+            <option value="Station Wagon/SUV">Station Wagon/SUV</option>
+            <option value="Bus">Bus</option>
+            <option value="Taxi">Taxi</option>
+            <option value="Pick-up Truck">Pick-up Truck</option>
+            <option value="Bike">Bike</option>
+            <option value="Box Truck">Box Truck</option>
+            <option value="Motorcycle">Motorcycle</option>
+            <option value="Van">Van</option>
+        </select><br>
+    <% } %>
+    <br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<%- include('../partials/footer') %>
+
+<script>
+    const map = L.map('map', {center: [40.7, -73.9], zoom: 11});
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    let marker = L.marker([0, 0]).addTo(map);
+
+    map.on('click', (e) => {
+        let latlng = e.latlng;
+        ;
+        latitude.value = latlng.lat;
+        longitude.value = latlng.lng;
+
+        marker.setLatLng(latlng);
+    });
+</script>
+</body>
+</html>
