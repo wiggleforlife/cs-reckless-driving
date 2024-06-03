@@ -6,17 +6,24 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Recent incidents</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+          rel="stylesheet">
 </head>
 <body>
 <%- include('../partials/nav') %>
 
-<label for="sort">Sort by: </label>
-<select name="sort" id="sort">
-    <option value="newest">Most recent</option>
-    <option value="oldest">Least recent</option>
-    <option value="most_injured">Most injuries</option>
-    <option value="most_killed">Most deaths</option>
-</select>
+<div style="text-align: center;">
+    <label for="sort"><strong><em>This table shows the 50 most recently reported incidents. You can sort by: </em></strong></label>
+    <select name="sort" id="sort">
+        <option value="newest">Most recent</option>
+        <option value="oldest">Least recent</option>
+        <option value="most_injured">Most injuries</option>
+        <option value="most_killed">Most deaths</option>
+    </select>
+</div>
 
 <table>
     <thead>
@@ -59,7 +66,7 @@
 
 <script>
     document.getElementById("sort").addEventListener("change", (e) => {
-        let url  = new URL(document.URL);
+        let url = new URL(document.URL);
         url.searchParams.set("sort", e.target.value);
         document.location.href = url.href;
     })

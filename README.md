@@ -10,8 +10,3 @@ Run the project like so:
 ```shell
 npm run dev
 ```
-
-## TODO
-* Description
-* CSS
-* Push data

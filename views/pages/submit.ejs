@@ -15,11 +15,39 @@
             crossorigin=""></script>
 
     <style>
+        form {
+            margin: 5em;
+        }
+
+        form input {
+            margin: 1em;
+        }
+
+        form label {
+            margin: 1em;
+        }
+
+        form select {
+            margin: 1em;
+        }
+
+        form button {
+            margin: 1em;
+        }
+
+        form #map {
+            margin: 1em;
+        }
+
         #map {
             height: 500px;
             width: 750px;
         }
     </style>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
 <%- include('../partials/nav') %>
@@ -101,7 +129,7 @@
 
     map.on('click', (e) => {
         let latlng = e.latlng;
-        ;
+
         latitude.value = latlng.lat;
         longitude.value = latlng.lng;
 
